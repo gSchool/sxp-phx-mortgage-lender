@@ -7,9 +7,9 @@ final class Lender {
     }
 
     public void addFunds(long funds) throws IllegalArgumentException{
-        if(funds == 0L) {
+        if(funds <= 0L) {
             throw new IllegalArgumentException("Amount added must be greater than 0");
         }
-        this.availableFunds = funds;
+        this.availableFunds = Math.addExact(this.availableFunds,funds);
     }
 }

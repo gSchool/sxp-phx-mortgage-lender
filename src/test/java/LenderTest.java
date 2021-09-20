@@ -30,9 +30,9 @@ final class LenderTest {
     /*addFunds
      * N - N/A
      * Z - input 0 -> throw exception
-     * O - input 1 ->
-     * M -
-     * B
+     * O - input 1 -> availableFunds = 1
+     * M - input 5 -> availableFunds = 5
+     * B - input negative amount -> throw exception; input Long.MAX_VALUE ->
      * I
      * E
      * S
@@ -76,5 +76,28 @@ final class LenderTest {
 
         //Then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void addFundsShouldThrowIllegalArgumentExceptionWhenPassedNegativeValue(){
+        //Given
+        Lender lender = new Lender();
+        String expected = "Amount added must be greater than 0";
+
+        //When
+        Exception actual = assertThrows(IllegalArgumentException.class, () -> lender.addFunds(Long.MIN_VALUE));
+
+        //Then
+        assertThat(actual.getMessage()).isEqualTo(expected);
+    }
+
+    @Test
+    void AddFundsShouldThrowArithmeticExceptionWhenFundsAreMaxedOut(){
+        //Given
+        Lender lender = new Lender();
+        lender.addFunds(Long.MAX_VALUE);
+
+        //When/Then
+        assertThrows(ArithmeticException.class, ()-> lender.addFunds(1L));
     }
 }
