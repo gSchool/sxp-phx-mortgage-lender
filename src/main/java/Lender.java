@@ -10,6 +10,6 @@ final class Lender {
         if(funds == 0L) {
             throw new IllegalArgumentException("Amount added must be greater than 0");
         }
-        this.availableFunds = 1L;
+        this.availableFunds = funds;
     }
 }

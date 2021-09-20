@@ -31,7 +31,7 @@ final class LenderTest {
      * N - N/A
      * Z - input 0 -> throw exception
      * O - input 1 ->
-     * M
+     * M -
      * B
      * I
      * E
@@ -58,6 +58,20 @@ final class LenderTest {
 
         //When
         lender.addFunds(1L);
+        Long actual = lender.getAvailableFunds();
+
+        //Then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void addFundsShouldIncreaseFundsByFiveWhenPassedFive(){
+        //Given
+        Lender lender = new Lender();
+        Long expected = 5L;
+
+        //When
+        lender.addFunds(5L);
         Long actual = lender.getAvailableFunds();
 
         //Then
